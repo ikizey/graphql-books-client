@@ -20,3 +20,20 @@ export const GET_AUTHORS = gql`
     }
   }
 `;
+
+export const ADD_BOOK = gql`
+  mutation addBook(
+    $name: String!
+    $shortDescription: String!
+    $authorIds: [ID!]
+  ) {
+    createBook(
+      name: $name
+      shortDescription: $shortDescription
+      authorIds: $authorIds
+    ) {
+      name
+      id
+    }
+  }
+`;
