@@ -12,6 +12,24 @@ export const GET_BOOKS = gql`
   }
 `;
 
+export const GET_BOOK = gql`
+  query getBook($id: ID!) {
+    book(id: $id) {
+      id
+      name
+      shortDescription
+      authors {
+        id
+        name
+        books {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
 export const GET_AUTHORS = gql`
   query getAuthors {
     authors {
