@@ -4,10 +4,8 @@ import { GET_AUTHORS, GET_BOOKS, ADD_BOOK } from './queries/queries';
 
 const AddBook = () => {
   const { loading, error, data } = useQuery(GET_AUTHORS);
-  const [
-    addBook,
-    { data: addBookData, loading: addBookLoading, error: addBookError },
-  ] = useMutation(ADD_BOOK);
+  const [addBook, { data: _, loading: addBookLoading, error: addBookError }] =
+    useMutation(ADD_BOOK);
 
   const [bookName, setBookName] = useState('');
   const [bookDescription, setBookDescription] = useState('');
@@ -27,8 +25,9 @@ const AddBook = () => {
     setBookDescription('');
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  if (loading || addBookLoading) return <p>Loading...</p>;
+  if (error || addBookError)
+    return <p>Error : {error?.message || addBookError?.message}</p>;
 
   return (
     <form onSubmit={submitForm}>
